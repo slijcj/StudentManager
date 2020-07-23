@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{05CC89B6-EF40-490F-A663-228AE6468776}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GDIPlusDemo</RootNamespace>
+    <AssemblyName>StudentManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Taget_Icon_32px_1183257_easyicon.net.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\mysql-for-visualstudio-1.2.9-noinstall\15.0v461\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin_1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin_1.Designer.cs">
+      <DependentUpon>Admin_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin.Designer.cs">
+      <DependentUpon>Admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dao.cs" />
+    <Compile Include="Enums\ButtonStatus.cs" />
+    <Compile Include="Enums\ClassStyle.cs" />
+    <Compile Include="Enums\MouseOperate.cs" />
+    <Compile Include="Enums\WindowStyle.cs" />
+    <Compile Include="Enums\WindowStyleEx.cs" />
+    <Compile Include="ModifyPassWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyPassWord.Designer.cs">
+      <DependentUpon>ModifyPassWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentInfoManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentInfoManager.Designer.cs">
+      <DependentUpon>StudentInfoManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectCourse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectCourse.Designer.cs">
+      <DependentUpon>SelectCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MySelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MySelect.Designer.cs">
+      <DependentUpon>MySelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderHelper.cs" />
+    <Compile Include="SystemButton.cs" />
+    <Compile Include="SystemButtonManager.cs" />
+    <Compile Include="Win32.cs" />
+    <Compile Include="StudentManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentManager.Designer.cs">
+      <DependentUpon>StudentManager.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Admin_1.resx">
+      <DependentUpon>Admin_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin.resx">
+      <DependentUpon>Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyPassWord.resx">
+      <DependentUpon>ModifyPassWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentInfoManager.resx">
+      <DependentUpon>StudentInfoManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectCourse.resx">
+      <DependentUpon>SelectCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MySelect.resx">
+      <DependentUpon>MySelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBase.resx">
+      <DependentUpon>FormBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginIndex.resx">
+      <DependentUpon>LoginIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="StudentManager.resx">
+      <DependentUpon>StudentManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_cup_32px_1210881_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Taget_Icon_32px_1183257_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uget_icon_32px_1174114_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_create_new_plus_positive_32px_1225528_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel_close_delete_reject_remove_32px_1225515_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_delete_minus_negative_remove_32px_1225442_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EasyTAG_icon_32px_1172009_easyicon.net1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\find_magnifier_magnifying_glass_search_zoom_32px_1225492_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_cup_32px_1210881_easyicon.net1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no_entry_icon_32px_1145563_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_icon_32px_1145584_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Taget_Icon_32px_1183257_easyicon.net1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uget_icon_32px_1174114_easyicon.net1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Taget_Icon_32px_1183257_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
