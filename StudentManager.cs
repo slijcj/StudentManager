@@ -114,7 +114,62 @@ namespace GDIPlusDemo
         private void 重启ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dao dao = new Dao();
-            dao.restart();
+            dao.LogOut();
+            //dao.restart();
+        }
+
+        private void StudentManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;           //取消关闭操作 表现为不关闭窗体  
+                this.Hide();               //隐藏窗体  
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Show();                                //窗体显示  
+            this.WindowState = FormWindowState.Normal;  //窗体状态默认大小  
+            this.Activate();                            //激活窗体给予焦点  
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.Hide();                      //隐藏窗体  
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            //点击"是(YES)"退出程序  
+            if (MessageBox.Show("确定要退出程序?", "安全提示",
+                        System.Windows.Forms.MessageBoxButtons.YesNo,
+                        System.Windows.Forms.MessageBoxIcon.Warning)
+                == System.Windows.Forms.DialogResult.Yes)
+            {
+                notifyIcon1.Visible = false;   //设置图标不可见  
+                this.Close();                  //关闭窗体  
+                this.Dispose();                //释放资源  
+                Application.Exit();            //关闭应用程序窗体  
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            this.Show();                                //窗体显示  
+            this.WindowState = FormWindowState.Normal;  //窗体状态默认大小  
+            this.Activate();                            //激活窗体给予焦点  
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            //点击鼠标"左键"发生  
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Visible = true;                        //窗体可见  
+                this.WindowState = FormWindowState.Normal;  //窗体默认大小  
+                this.notifyIcon1.Visible = true;            //设置图标可见  
+            }
         }
     }
 }

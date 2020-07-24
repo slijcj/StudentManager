@@ -20,7 +20,14 @@ namespace GDIPlusDemo
             Application.Exit();//退出系统
             System.Diagnostics.Process.Start(System.Reflection.Assembly.GetExecutingAssembly().Location);//重启系统
         }
-
+        public void LogOut()
+        {
+            Application.Exit();//退出系统
+            LoginIndex login = new LoginIndex();
+            login.ShowDialog();
+            System.Diagnostics.Process.Start(System.Reflection.Assembly.GetExecutingAssembly().Location);//重启系统
+        }
+  
         public MySqlConnection connectiont()
         {
             try
