@@ -38,6 +38,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.重启ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.信息管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加教师信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改教师信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,6 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.重启ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -143,6 +143,13 @@
             this.退出ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
+            // 
+            // 重启ToolStripMenuItem
+            // 
+            this.重启ToolStripMenuItem.Name = "重启ToolStripMenuItem";
+            this.重启ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.重启ToolStripMenuItem.Text = "退出登录";
+            this.重启ToolStripMenuItem.Click += new System.EventHandler(this.重启ToolStripMenuItem_Click);
             // 
             // 信息管理ToolStripMenuItem
             // 
@@ -250,13 +257,6 @@
             // 
             this.Column4.HeaderText = "职称";
             this.Column4.Name = "Column4";
-            // 
-            // 重启ToolStripMenuItem
-            // 
-            this.重启ToolStripMenuItem.Name = "重启ToolStripMenuItem";
-            this.重启ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.重启ToolStripMenuItem.Text = "重启";
-            this.重启ToolStripMenuItem.Click += new System.EventHandler(this.重启ToolStripMenuItem_Click);
             // 
             // Admin
             // 

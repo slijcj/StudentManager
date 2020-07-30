@@ -104,7 +104,7 @@ namespace GDIPlusDemo
         private void 重启ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dao dao = new Dao();
-            dao.restart();
+            dao.LogOut();
         }
     }
 }

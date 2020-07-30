@@ -120,11 +120,18 @@ namespace GDIPlusDemo
 
         private void StudentManager_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            MessageBoxButtons message = MessageBoxButtons.OKCancel;
+            DialogResult dr = MessageBox.Show("确认要退出吗？","退出系统",message);
+            if(dr == DialogResult.OK)
             {
-                e.Cancel = true;           //取消关闭操作 表现为不关闭窗体  
-                this.Hide();               //隐藏窗体  
+                if (e.CloseReason == CloseReason.UserClosing)
+                {
+                    e.Cancel = true;           //取消关闭操作 表现为不关闭窗体  
+                    this.Hide();               //隐藏窗体  
+                }
             }
+            
+            
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -170,6 +177,11 @@ namespace GDIPlusDemo
                 this.WindowState = FormWindowState.Normal;  //窗体默认大小  
                 this.notifyIcon1.Visible = true;            //设置图标可见  
             }
+        }
+
+        private void 最小化ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

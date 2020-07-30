@@ -83,12 +83,15 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\mysql-for-visualstudio-1.2.9-noinstall\15.0v461\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\mysql-for-visualstudio-1.2.9-noinstall\16.0v472\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -98,6 +101,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>E:\vs_dll\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin_1.cs">
@@ -112,17 +118,29 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="ckp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ckp.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Dao.cs" />
     <Compile Include="Enums\ButtonStatus.cs" />
     <Compile Include="Enums\ClassStyle.cs" />
     <Compile Include="Enums\MouseOperate.cs" />
     <Compile Include="Enums\WindowStyle.cs" />
     <Compile Include="Enums\WindowStyleEx.cs" />
+    <Compile Include="FtpUpLoad.cs" />
     <Compile Include="ModifyPassWord.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModifyPassWord.Designer.cs">
       <DependentUpon>ModifyPassWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mysql.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mysql.Designer.cs">
+      <DependentUpon>mysql.cs</DependentUpon>
     </Compile>
     <Compile Include="StudentInfoManager.cs">
       <SubType>Form</SubType>
@@ -169,6 +187,9 @@
     <EmbeddedResource Include="ModifyPassWord.resx">
       <DependentUpon>ModifyPassWord.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="mysql.resx">
+      <DependentUpon>mysql.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StudentInfoManager.resx">
       <DependentUpon>StudentInfoManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,6 +219,37 @@
       <DependentUpon>StudentManager.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="ckp.xsc">
+      <DependentUpon>ckp.xsd</DependentUpon>
+    </None>
+    <None Include="ckp.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ckp.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ckp.xss">
+      <DependentUpon>ckp.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Admin.datasource" />
+    <None Include="Properties\DataSources\admin_1.datasource" />
+    <None Include="Properties\DataSources\ckp.datasource" />
+    <None Include="Properties\DataSources\Dao.datasource" />
+    <None Include="Properties\DataSources\FormBase.datasource" />
+    <None Include="Properties\DataSources\FtpUpLoad.datasource" />
+    <None Include="Properties\DataSources\GDIPlusDemo.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\GDIPlusDemo.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\LoginIndex.datasource" />
+    <None Include="Properties\DataSources\ModifyPassWord.datasource" />
+    <None Include="Properties\DataSources\MySelect.datasource" />
+    <None Include="Properties\DataSources\mysql.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\RenderHelper.datasource" />
+    <None Include="Properties\DataSources\SelectCourse.datasource" />
+    <None Include="Properties\DataSources\StudentInfoManager.datasource" />
+    <None Include="Properties\DataSources\StudentManager.datasource" />
+    <None Include="Properties\DataSources\SystemButton.datasource" />
+    <None Include="Properties\DataSources\SystemButtonManager.datasource" />
+    <None Include="Properties\DataSources\Win32.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -249,6 +301,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Taget_Icon_32px_1183257_easyicon.net.ico" />
+    <Content Include="template.html" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -261,6 +314,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

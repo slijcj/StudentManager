@@ -34,15 +34,24 @@ namespace GDIPlusDemo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string sql = "update Student set PassWord = '"+textBox2.Text+ "' where Id = '" + SID + "'";
-            Dao dao = new Dao();
-            int i = dao.Excute(sql);
-            if (i > 0)
+            if(textBox2.Text == textBox3.Text)
             {
-                MessageBox.Show("修改成功！");
-                this.Close();
-                dao.restart();
+                string sql = "update Student set PassWord = '" + textBox2.Text + "' where Id = '" + SID + "'";
+                Dao dao = new Dao();
+                int i = dao.Excute(sql);
+                if (i > 0)
+                {
+
+                    MessageBox.Show("修改成功！");
+                    this.Close();
+                    dao.restart();
+                }
             }
+            else
+            {
+                MessageBox.Show("两次输入的密码不一致，请检查后再试！");
+            }
+            
         }
 
         private void ModifyPassWord_Load(object sender, EventArgs e)

@@ -72,62 +72,6 @@ namespace GDIPlusDemo
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public void command(string sql)
-        //{
-        //    sql_select = sql;
-        //}
-        //public void Database_Select_All(MySqlConnection mySqlConnection)//将查询的数据结果显示在表格中
-        //{
-        //    try
-        //    {
-        //        if (mySqlConnection != null)
-        //        {
-        //            mySqlConnection.Open();
-        //        }
-        //        Console.WriteLine("查询通道打开");
-                
-                
-        //        //string sql_select = "SELECT * FROM user";
-        //        mySqlCommand = new MySqlCommand(sql_select, mySqlConnection);
-        //        //将查询结果绑定到dataview数据源
-        //        mySqlDataAdapter = new MySqlDataAdapter(mySqlCommand);
-        //        dataSet = new DataSet();
-        //        mySqlDataAdapter.Fill(dataSet, "Student");
-        //        //dataGridView1.DataSource = dataSet;
-        //        //dataGridView1.DataMember = "user";
-
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        Console.WriteLine(exception);
-        //    }
-        //    finally
-        //    {
-        //        mySqlConnection.Close();
-        //    }
-        //}
-
         
 
     }

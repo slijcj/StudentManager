@@ -34,6 +34,7 @@
             this.系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重启ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.最小化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.信息管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加学生信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改学生信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +84,8 @@
             // 
             this.系统ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.退出ToolStripMenuItem,
-            this.重启ToolStripMenuItem});
+            this.重启ToolStripMenuItem,
+            this.最小化ToolStripMenuItem});
             this.系统ToolStripMenuItem.Image = global::GDIPlusDemo.Properties.Resources.no_entry_icon_32px_1145563_easyicon_net;
             this.系统ToolStripMenuItem.Name = "系统ToolStripMenuItem";
             this.系统ToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
@@ -102,6 +104,13 @@
             this.重启ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.重启ToolStripMenuItem.Text = "退出登录";
             this.重启ToolStripMenuItem.Click += new System.EventHandler(this.重启ToolStripMenuItem_Click);
+            // 
+            // 最小化ToolStripMenuItem
+            // 
+            this.最小化ToolStripMenuItem.Name = "最小化ToolStripMenuItem";
+            this.最小化ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.最小化ToolStripMenuItem.Text = "最小化";
+            this.最小化ToolStripMenuItem.Click += new System.EventHandler(this.最小化ToolStripMenuItem_Click);
             // 
             // 信息管理ToolStripMenuItem
             // 
@@ -331,6 +340,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "StudentManager";
@@ -384,5 +394,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem 最小化ToolStripMenuItem;
     }
 }
