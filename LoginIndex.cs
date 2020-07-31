@@ -7,6 +7,10 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Data;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Runtime.Remoting.Messaging;
+using System.Net.Mail;
 
 namespace GDIPlusDemo
 {
@@ -31,10 +35,16 @@ namespace GDIPlusDemo
         private TextBox textBox1;
         private TextBox textBox2;
         private ComboBox comboBox1;
-        private Timer timer1;
+        //private Timer timer1;
+        private System.Windows.Forms.Timer timer1;
         private IContainer components;
         private Button button1;
         private Button button2;
+        private PictureBox pictureBox2;
+        private BackgroundWorker backgroundWorker1;
+        private LinkLabel linkLabel1;
+        private TextBox textBox3;
+        private Button button3;
 
         //系统按钮管理器
         private SystemButtonManager _systemButtonManager;
@@ -46,8 +56,11 @@ namespace GDIPlusDemo
         public LoginIndex()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
             FormExIni();
             _systemButtonManager = new SystemButtonManager(this);
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
         }
 
         #endregion
@@ -151,7 +164,7 @@ namespace GDIPlusDemo
                 {
                     if (MaximizeBox) { cp.Style |= (int)WindowStyle.WS_MAXIMIZEBOX; }
                     if (MinimizeBox) { cp.Style |= (int)WindowStyle.WS_MINIMIZEBOX; }
-                    //cp.ExStyle |= (int)WindowStyle.WS_CLIPCHILDREN;  //防止因窗体控件太多出现闪烁
+                    cp.ExStyle |= (int)WindowStyle.WS_CLIPCHILDREN;  //防止因窗体控件太多出现闪烁
                     cp.ClassStyle |= (int)ClassStyle.CS_DropSHADOW;  //实现窗体边框阴影效果
                 }
                 return cp;
@@ -294,7 +307,13 @@ namespace GDIPlusDemo
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -404,10 +423,54 @@ namespace GDIPlusDemo
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = global::GDIPlusDemo.Properties.Resources.加载;
+            this.pictureBox2.Location = new System.Drawing.Point(425, 330);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(64, 64);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 10;
+            this.pictureBox2.TabStop = false;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.Location = new System.Drawing.Point(611, 428);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(61, 19);
+            this.linkLabel1.TabIndex = 11;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "找回密码";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(679, 425);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(175, 25);
+            this.textBox3.TabIndex = 12;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(794, 426);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(60, 23);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "发送";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // LoginIndex
             // 
             this.AcceptButton = this.button2;
             this.ClientSize = new System.Drawing.Size(913, 510);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
@@ -426,6 +489,7 @@ namespace GDIPlusDemo
             this.Text = "登录";
             this.Load += new System.EventHandler(this.FormEx_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -585,6 +649,9 @@ namespace GDIPlusDemo
         private void FormEx_Load(object sender, EventArgs e)
         {
             dao.connectiont();
+            pictureBox2.Visible = false;
+            textBox3.Visible = false;
+            button3.Visible = false;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -594,6 +661,7 @@ namespace GDIPlusDemo
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            
             if (pictureBox1.Location.X < 360)
             {
                 pictureBox1.Location = new Point(pictureBox1.Location.X + 10, pictureBox1.Location.Y);
@@ -641,7 +709,27 @@ namespace GDIPlusDemo
             textBox2.Text = null;
             comboBox1.Text = null;
         }
+        delegate int LoginDelegate();
+        int LoginBegin()
+        {
+            pictureBox2.Visible = true;
+            return 1;
+        }
+        void LoginEnd(IAsyncResult result)
+        {
+            AsyncResult asyncResult = (AsyncResult)result;
+            
+            LoginDelegate login = (LoginDelegate)asyncResult.AsyncDelegate;
+            int loginresult = login.EndInvoke(result);
+            if (loginresult == 1)
+            {
 
+            }
+            else
+            {
+
+            }         
+        }
         /// <summary>
         /// 登录事件
         /// </summary>
@@ -649,19 +737,24 @@ namespace GDIPlusDemo
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            //(new LoginDelegate(LoginBegin)).BeginInvoke(LoginEnd, null);
+            
             if (login())
             {
+                
                 timer1.Start();
                 textBox1.Visible = false;
                 textBox2.Visible = false;
                 comboBox1.Visible = false;
                 button1.Visible = false;
                 button2.Visible = false;
+                linkLabel1.Visible = false;
                 label2.Visible = false;
                 label3.Visible = false;
                 label4.Visible = false;
             }
         }
+        
         private bool login()
         {
             
@@ -678,6 +771,7 @@ namespace GDIPlusDemo
                 IDataReader dr = dao.Read(sql);
                 if (dr.Read())
                 {
+                    pictureBox2.Visible = true;
                     return true;
                 }
                 else
@@ -693,6 +787,7 @@ namespace GDIPlusDemo
                 IDataReader dr = dao.Read(sql);
                 if (dr.Read())
                 {
+                    pictureBox2.Visible = true;
                     return true;
                 }
                 else
@@ -705,6 +800,7 @@ namespace GDIPlusDemo
             {
                 if (textBox1.Text == "admin" && textBox2.Text == "admin")
                 {
+                    pictureBox2.Visible = true;
                     return true;
                 }
                 else
@@ -714,6 +810,45 @@ namespace GDIPlusDemo
                 }
             }
             return false;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            textBox3.Visible = true;
+            button3.Visible = true;
+            
+
+        }
+        void send_mail(string address_from,string authorizationCode,string mail_to)
+        {
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(address_from);
+            message.To.Add(mail_to);
+            message.Subject = "找回密码";
+            message.Body = "19990221";
+            SmtpClient sct = new SmtpClient();
+            sct.Credentials = new System.Net.NetworkCredential(address_from,authorizationCode);
+            sct.Host = "smtp.163.com";
+            sct.Send(message);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string address_from = "ckp2834880181@163.com";
+            string authorizationCode = "HMFQSTEOFJSWZPMU";
+            string mail_to_address = textBox3.Text;
+            try
+            {
+                send_mail(address_from, authorizationCode, mail_to_address);
+                MessageBox.Show("请注意查收邮件");
+                textBox3.Visible = false;
+                button3.Visible = false;
+            }
+            catch
+            {
+                MessageBox.Show("发送失败，请检查网络");
+            }
+            
         }
     }
 }

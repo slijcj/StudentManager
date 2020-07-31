@@ -11,10 +11,7 @@ namespace GDIPlusDemo
     class Dao
     {
 
-        public void MysqlConnect()
-        {
-            connectiont();//数据库链接函数
-        }
+        
         public void restart()
         {
             Application.Exit();//退出系统

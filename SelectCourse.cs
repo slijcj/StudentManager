@@ -10,15 +10,17 @@ using System.Text;
 using System.Windows.Forms;
 using ThoughtWorks.QRCode.Codec;
 using System.Web;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
 
 namespace GDIPlusDemo
 {
     public partial class SelectCourse : Form
     {
         string SID;//记录登录选课系统账户的学号
-        string myCourse;
-        string myCourse2;
         
+
+
         public SelectCourse(string sId)
         {
             SID = sId;
@@ -57,6 +59,58 @@ namespace GDIPlusDemo
         {
             Application.Exit();//关闭整个程序
         }
+
+        public class Client
+        {
+            private int clientID;
+            public int ClientID { get => clientID; set => clientID = value; }
+            private string cName;
+            public string CName { get => cName; set => cName = value; }
+        }
+
+        public void erweima()
+        {
+            string sql = "select * from CourseRecord where sId = '" + SID + "'";
+            Dao dao = new Dao();
+            IDataReader dr = dao.Read(sql);
+            DataTable dt2 = new DataTable();
+            while (dr.Read())
+            {
+                string cId = dr["cId"].ToString();
+                string sql2 = "select * from Course where Id='" + cId + "'";
+                IDataReader dr2 = dao.Read(sql2);
+                dr2.Read();
+                //DataSet ds = new DataSet();
+
+                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2, dao.connectiont());
+
+                //选择存储容器时DataSet还是DataTable
+                mySqlDataAdapter.Fill(dt2);
+                //mySqlDataAdapter.Fill(ds);
+
+                //生明一个数组，并设置大小
+                string[,] course1 = new string[dt2.Rows.Count, dt2.Columns.Count];
+                int length = dt2.Rows.Count;
+                int height = dt2.Columns.Count;
+                int i = 0;
+                //MessageBox.Show(length.ToString());
+                foreach (DataRow DR in dt2.Rows)
+                {
+                    int j = 0;
+                    foreach (DataColumn DC in dt2.Columns)
+                    {
+                        course1[i, j] = DR[DC].ToString();
+                        Console.WriteLine(DR[DC.ColumnName].ToString());
+                        j = j + 1;
+                    }
+                    i = i + 1;
+                }
+                pictureBox1.Image = CodeImage(course1, length, height);
+                dr2.Close();
+
+            }
+        }
+
         /// <summary>
         /// 窗体加载时
         /// </summary>
@@ -69,22 +123,39 @@ namespace GDIPlusDemo
             
             Dao dao = new Dao();
             IDataReader dr = dao.Read(sql);
+            DataTable dt = new DataTable();
             while (dr.Read())
             {
                 string cId = dr["cId"].ToString();
                 string sql2 = "select * from Course where Id='" + cId + "'";
                 IDataReader dr2 = dao.Read(sql2);
                 dr2.Read();
-                string sno, name, teacher, credit;
-                sno = dr2["Id"].ToString();
-                name = dr2["Name"].ToString();
-                teacher = dr2["Teacher"].ToString();
-                credit = dr2["Credit"].ToString();
-                myCourse = "学号：" + sno+"\n姓名：" + name + "\n授课教师：" + teacher + "\n学分：" + credit;
-                myCourse2 = "" + sno + name + teacher + credit;
-                string[] myCourse3 = { sno, name, teacher, credit };
+                //DataSet ds = new DataSet();
+                
+                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2,dao.connectiont());
 
-                pictureBox1.Image = CodeImage(myCourse,myCourse2, myCourse3);
+                //选择存储容器时DataSet还是DataTable
+                mySqlDataAdapter.Fill(dt);
+                //mySqlDataAdapter.Fill(ds);
+
+                //生明一个数组，并设置大小
+                string[,] course1 = new string[dt.Rows.Count,dt.Columns.Count];
+                int length = dt.Rows.Count;
+                int height = dt.Columns.Count;
+                int i = 0;
+                //MessageBox.Show(length.ToString());
+                foreach (DataRow DR in dt.Rows)
+                {
+                    int j = 0;
+                    foreach (DataColumn DC in dt.Columns)
+                    {
+                        course1[i, j] = DR[DC].ToString();
+                        Console.WriteLine(DR[DC.ColumnName].ToString());
+                        j = j + 1;
+                    }
+                    i = i + 1;
+                }
+                pictureBox1.Image = CodeImage(course1, length, height);
                 dr2.Close();
 
             }
@@ -104,9 +175,12 @@ namespace GDIPlusDemo
                 int i = dao.Excute(sql);
                 if (i > 0)
                 {
+                    erweima();
                     MessageBox.Show("选课成功!");
+                    erweima();
                 }
                 this.dataGridView1.Sort(this.dataGridView1.Columns["课程编号"], ListSortDirection.Ascending);
+                
 
             }
             else
@@ -180,7 +254,9 @@ namespace GDIPlusDemo
                 int i = dao.Excute(sql);
                 if (i > 0)
                 {
+                    
                     MessageBox.Show("选课成功!");
+                    erweima();
                 }
             }
             else
@@ -188,11 +264,13 @@ namespace GDIPlusDemo
                 MessageBox.Show("不允许重复选课！");
             }
         }
-        public Bitmap CodeImage(string str,string str2,string[] str3)
+        /// <summary>
+        /// 动态生成html
+        /// </summary>
+        /// <param name="str3"></param>
+        /// <returns></returns>
+        public Bitmap CodeImage(string[,] str3,int lenght,int height)
         {
-            
-
-
 
             //动态生成html页面
             
@@ -207,17 +285,24 @@ namespace GDIPlusDemo
                         htmltext.Append(line);
                     }
                     sr.Close();
+                    
                 }
             }
             catch
             {
                 MessageBox.Show("文件读写错误！");
             }
+
             
-            //MessageBox.Show(format[0]);
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < lenght; i++)
             {
-                htmltext.Replace("$form["+i+"]$", str3[i]);
+                
+                for (int j = 0;j< height; j++)
+                {
+                    
+                    htmltext.Replace("$form[" + i +","+j+"]$", str3[i,j]);
+                }
+                
             }
             try
             {

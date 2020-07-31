@@ -1,13 +1,92 @@
 ﻿<html>
-    <head>
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
-    </head>
-    <body>
-        <h1>我的选课</h1>
-        <h1>课程编号：</h1><h2>$form[0]$</h2>
-        <h1>课程名称：</h1><h2>$form[1]$</h2>
-        <h1>课程老师：</h1><h2>$form[2]$</h2>
-        <h1>课程学分：</h1><h2>$form[3]$</h2>
-    </body>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <style>
+
+        .abc {
+            border: 2px dashed #06F;
+            width: 800px
+        }
+
+        font {
+            font-size: 300%;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div align="center" id="test"><h1><font size="7">SelectCourse</font></h1></div>
+
+
+    <div align="center">
+        <div id="div1" class="abc">
+            <h2>课程1：</h2>
+            <font id="font1">$form[0,0]$</font>
+            <font>$form[0,1]$</font>
+            <font>$form[0,2]$</font>
+            <font>$form[0,3]$</font>
+        </div>
+        <br />
+        <div id="div2" class="abc">
+            <h2>课程2：</h2>
+            <font id="font2">$form[1,0]$</font>
+            <font>$form[1,1]$</font>
+            <font>$form[1,2]$</font>
+            <font>$form[1,3]$</font>
+        </div>
+        <br />
+        <div id="div3" class="abc">
+            <h2>课程3：</h2>
+            <font id="font3">$form[2,0]$</font>
+            <font>$form[2,1]$</font>
+            <font>$form[2,2]$</font>
+            <font>$form[2,3]$</font>
+        </div>
+        <br />
+        <div id="div4" class="abc">
+            <h2>课程4：</h2>
+            <font id="font4">$form[3,0]$</font>
+            <font>$form[3,1]$</font>
+            <font>$form[3,2]$</font>
+            <font>$form[3,3]$</font>
+        </div>
+        <br />
+        <div id="div5" class="abc">
+            <h2>课程5：</h2>
+            <font id="font5">$form[4,0]$</font>
+            <font>$form[4,1]$</font>
+            <font>$form[4,2]$</font>
+            <font>$form[4,3]$</font>
+        </div>
+    </div>
+
+
+
+
+</body>
+
 </html>
+<script>
+
+    var temp = "";
+    var div = "";
+
+    for (var i = 1; i < 6; i++) {
+        
+        temp = "font" + i;
+        div = "div" + i;
+;       var text = document.getElementById(temp).innerText;
+        if (/[!~@#$%&=]+/gi.test(text)) {
+            document.getElementById(div).style.display = "none";
+        }
+        temp = "";
+        div = "";
+    }
+    
+    
+    
+
+
+</script>

@@ -300,6 +300,7 @@
     <None Include="Resources\uget_icon_32px_1174114_easyicon.net1.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\加载.gif" />
     <Content Include="Taget_Icon_32px_1183257_easyicon.net.ico" />
     <Content Include="template.html" />
   </ItemGroup>
