@@ -130,6 +130,12 @@
     <Compile Include="Enums\WindowStyle.cs" />
     <Compile Include="Enums\WindowStyleEx.cs" />
     <Compile Include="FtpUpLoad.cs" />
+    <Compile Include="gif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gif.Designer.cs">
+      <DependentUpon>gif.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModifyPassWord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gif.resx">
+      <DependentUpon>gif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifyPassWord.resx">
       <DependentUpon>ModifyPassWord.cs</DependentUpon>

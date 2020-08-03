@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.Remoting.Messaging;
 using System.Net.Mail;
+using Microsoft.Win32;
 
 namespace GDIPlusDemo
 {
@@ -45,6 +46,11 @@ namespace GDIPlusDemo
         private LinkLabel linkLabel1;
         private TextBox textBox3;
         private Button button3;
+        private NotifyIcon notifyIcon1;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem 开机启动ToolStripMenuItem;
+        private ToolStripMenuItem 开启ToolStripMenuItem;
+        private ToolStripMenuItem 关闭ToolStripMenuItem;
 
         //系统按钮管理器
         private SystemButtonManager _systemButtonManager;
@@ -55,13 +61,19 @@ namespace GDIPlusDemo
 
         public LoginIndex()
         {
+
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             FormExIni();
+
             _systemButtonManager = new SystemButtonManager(this);
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
+           
+
         }
+        
+       
 
         #endregion
 
@@ -312,8 +324,14 @@ namespace GDIPlusDemo
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.开启ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -463,6 +481,44 @@ namespace GDIPlusDemo
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开机启动ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // 开机启动ToolStripMenuItem
+            // 
+            this.开机启动ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开启ToolStripMenuItem,
+            this.关闭ToolStripMenuItem});
+            this.开机启动ToolStripMenuItem.Name = "开机启动ToolStripMenuItem";
+            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.开机启动ToolStripMenuItem.Text = "开机启动";
+            this.开机启动ToolStripMenuItem.Click += new System.EventHandler(this.开机启动ToolStripMenuItem_Click);
+            // 
+            // 开启ToolStripMenuItem
+            // 
+            this.开启ToolStripMenuItem.Name = "开启ToolStripMenuItem";
+            this.开启ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.开启ToolStripMenuItem.Text = "开启";
+            this.开启ToolStripMenuItem.Click += new System.EventHandler(this.开启ToolStripMenuItem_Click);
+            // 
+            // 关闭ToolStripMenuItem
+            // 
+            this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.关闭ToolStripMenuItem.Text = "关闭";
+            this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
+            // 
             // LoginIndex
             // 
             this.AcceptButton = this.button2;
@@ -490,6 +546,7 @@ namespace GDIPlusDemo
             this.Load += new System.EventHandler(this.FormEx_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -849,6 +906,42 @@ namespace GDIPlusDemo
                 MessageBox.Show("发送失败，请检查网络");
             }
             
+        }
+
+        private void 开机启动ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void 开启ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser;
+                RegistryKey run = key.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+                run.SetValue("stuManage", Application.ExecutablePath);
+                MessageBox.Show("设置成功");
+            }
+            catch
+            {
+                MessageBox.Show("设置失败");
+            }
+        }
+
+        private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser;
+                RegistryKey run = key.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+                run.DeleteValue("stuManage", false);
+                MessageBox.Show("关闭成功");
+            }
+            catch
+            {
+                MessageBox.Show("关闭");
+            }
         }
     }
 }
