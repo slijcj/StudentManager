@@ -52,6 +52,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.选择课程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.浏览器查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -106,7 +107,8 @@
             // 
             this.我的课程ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.扫码查看ToolStripMenuItem,
-            this.本地查看ToolStripMenuItem});
+            this.本地查看ToolStripMenuItem,
+            this.浏览器查看ToolStripMenuItem});
             this.我的课程ToolStripMenuItem.Name = "我的课程ToolStripMenuItem";
             this.我的课程ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.我的课程ToolStripMenuItem.Text = "我的课程";
@@ -114,7 +116,7 @@
             // 扫码查看ToolStripMenuItem
             // 
             this.扫码查看ToolStripMenuItem.Name = "扫码查看ToolStripMenuItem";
-            this.扫码查看ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.扫码查看ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.扫码查看ToolStripMenuItem.Text = "扫码查看";
             this.扫码查看ToolStripMenuItem.MouseEnter += new System.EventHandler(this.扫码查看ToolStripMenuItem_MouseEnter);
             this.扫码查看ToolStripMenuItem.MouseLeave += new System.EventHandler(this.扫码查看ToolStripMenuItem_MouseLeave);
@@ -122,7 +124,7 @@
             // 本地查看ToolStripMenuItem
             // 
             this.本地查看ToolStripMenuItem.Name = "本地查看ToolStripMenuItem";
-            this.本地查看ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.本地查看ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.本地查看ToolStripMenuItem.Text = "本地查看";
             this.本地查看ToolStripMenuItem.Click += new System.EventHandler(this.本地查看ToolStripMenuItem_Click);
             // 
@@ -229,6 +231,13 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // 浏览器查看ToolStripMenuItem
+            // 
+            this.浏览器查看ToolStripMenuItem.Name = "浏览器查看ToolStripMenuItem";
+            this.浏览器查看ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.浏览器查看ToolStripMenuItem.Text = "浏览器查看";
+            this.浏览器查看ToolStripMenuItem.Click += new System.EventHandler(this.浏览器查看ToolStripMenuItem_Click);
+            // 
             // SelectCourse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -281,5 +290,6 @@
         private System.Windows.Forms.ToolStripMenuItem 扫码查看ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem 本地查看ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 浏览器查看ToolStripMenuItem;
     }
 }

@@ -74,26 +74,22 @@ namespace GDIPlusDemo
             Dao dao = new Dao();
             IDataReader dr = dao.Read(sql);
             DataTable dt2 = new DataTable();
+            string cId = dr["cId"].ToString();
+            string sql2 = "select * from Course where Id='" + cId + "'";
+            IDataReader dr2 = dao.Read(sql2);
+            MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2, dao.connectiont());
+
+            //mySqlDataAdapter.Fill(ds);
+            mySqlDataAdapter.Fill(dt2);
+            //生明一个数组，并设置大小
+            string[,] course1 = new string[dt2.Rows.Count, dt2.Columns.Count];
+            int length = dt2.Rows.Count;
+            int height = dt2.Columns.Count;
+            int i = 0;
+            //MessageBox.Show(length.ToString());
+            dr2.Read();
             while (dr.Read())
             {
-                string cId = dr["cId"].ToString();
-                string sql2 = "select * from Course where Id='" + cId + "'";
-                IDataReader dr2 = dao.Read(sql2);
-                dr2.Read();
-                //DataSet ds = new DataSet();
-
-                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2, dao.connectiont());
-
-                //选择存储容器时DataSet还是DataTable
-                mySqlDataAdapter.Fill(dt2);
-                //mySqlDataAdapter.Fill(ds);
-
-                //生明一个数组，并设置大小
-                string[,] course1 = new string[dt2.Rows.Count, dt2.Columns.Count];
-                int length = dt2.Rows.Count;
-                int height = dt2.Columns.Count;
-                int i = 0;
-                //MessageBox.Show(length.ToString());
                 foreach (DataRow DR in dt2.Rows)
                 {
                     int j = 0;
@@ -124,26 +120,28 @@ namespace GDIPlusDemo
             Dao dao = new Dao();
             IDataReader dr = dao.Read(sql);
             DataTable dt = new DataTable();
+
+
+
+
+
             while (dr.Read())
             {
-                string cId = dr["cId"].ToString();
-                string sql2 = "select * from Course where Id='" + cId + "'";
-                IDataReader dr2 = dao.Read(sql2);
-                dr2.Read();
-                //DataSet ds = new DataSet();
+                string cId2 = dr["cId"].ToString();
                 
-                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2,dao.connectiont());
-
-                //选择存储容器时DataSet还是DataTable
+                string sql2 = "select * from Course where Id='" + cId2 + "'";
+                IDataReader dr2 = dao.Read(sql2);
+                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2, dao.connectiont());
                 mySqlDataAdapter.Fill(dt);
-                //mySqlDataAdapter.Fill(ds);
-
                 //生明一个数组，并设置大小
-                string[,] course1 = new string[dt.Rows.Count,dt.Columns.Count];
+                string[,] course1 = new string[dt.Rows.Count, dt.Columns.Count];
                 int length = dt.Rows.Count;
                 int height = dt.Columns.Count;
                 int i = 0;
-                //MessageBox.Show(length.ToString());
+
+
+                dr2.Read();
+
                 foreach (DataRow DR in dt.Rows)
                 {
                     int j = 0;
@@ -159,6 +157,7 @@ namespace GDIPlusDemo
                 dr2.Close();
 
             }
+
             dr.Close();//关闭连接
         }
 
@@ -306,7 +305,7 @@ namespace GDIPlusDemo
             }
             try
             {
-                using (StreamWriter sw = new StreamWriter("E:\\html\\test.html", false, System.Text.Encoding.GetEncoding("GBK")))//保存地址
+                using (StreamWriter sw = new StreamWriter(System.AppDomain.CurrentDomain.BaseDirectory+"\\test.html", false, System.Text.Encoding.GetEncoding("GBK")))//保存地址
                 {
                     sw.WriteLine(htmltext);
                     sw.Flush();
@@ -320,13 +319,13 @@ namespace GDIPlusDemo
 
 
             //拼接文件名，上传ftp服务器
-            string file_path = "E:\\html\\"+"test.html";
+            string file_path = System.AppDomain.CurrentDomain.BaseDirectory + "\\test.html";
             string ftp_path = "122.51.231.110:21";
             FtpUpLoad ftpUpLoad = new FtpUpLoad();
             ftpUpLoad.Upload(file_path, ftp_path);
 
 
-            System.Drawing.Bitmap bt;
+            Bitmap bt;
             //实例化一个生成二维码的对象
             QRCodeEncoder qrEncoder = new QRCodeEncoder();
             //设置二维码的编码模式
@@ -371,5 +370,9 @@ namespace GDIPlusDemo
             mySelect.ShowDialog();
         }
 
+        private void 浏览器查看ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://caokunpeng.xyz/html/test.html");
+        }
     }
 }

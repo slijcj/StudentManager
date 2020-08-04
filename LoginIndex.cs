@@ -13,6 +13,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Net.Mail;
 using Microsoft.Win32;
 
+
 namespace GDIPlusDemo
 {
     public class LoginIndex : FormBase
@@ -705,7 +706,7 @@ namespace GDIPlusDemo
 
         private void FormEx_Load(object sender, EventArgs e)
         {
-            dao.connectiont();
+            //dao.connectiont();
             pictureBox2.Visible = false;
             textBox3.Visible = false;
             button3.Visible = false;
@@ -885,14 +886,14 @@ namespace GDIPlusDemo
             message.Body = "19990221";
             SmtpClient sct = new SmtpClient();
             sct.Credentials = new System.Net.NetworkCredential(address_from,authorizationCode);
-            sct.Host = "smtp.163.com";
+            sct.Host = "smtp.qq.com";
             sct.Send(message);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string address_from = "ckp2834880181@163.com";
-            string authorizationCode = "HMFQSTEOFJSWZPMU";
+            string address_from = "2834880181@qq.com";
+            string authorizationCode = "ackfliwhaadrdfgf";
             string mail_to_address = textBox3.Text;
             try
             {

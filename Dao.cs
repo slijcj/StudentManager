@@ -66,10 +66,11 @@ namespace GDIPlusDemo
         {
             return command(sql).ExecuteReader();
         }
-
-
-
         
+
+
+
+
 
     }
 }
