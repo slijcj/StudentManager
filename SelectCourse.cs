@@ -74,22 +74,19 @@ namespace GDIPlusDemo
             Dao dao = new Dao();
             IDataReader dr = dao.Read(sql);
             DataTable dt2 = new DataTable();
-            string cId = dr["cId"].ToString();
-            string sql2 = "select * from Course where Id='" + cId + "'";
-            IDataReader dr2 = dao.Read(sql2);
-            MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2, dao.connectiont());
-
-            //mySqlDataAdapter.Fill(ds);
-            mySqlDataAdapter.Fill(dt2);
-            //生明一个数组，并设置大小
-            string[,] course1 = new string[dt2.Rows.Count, dt2.Columns.Count];
-            int length = dt2.Rows.Count;
-            int height = dt2.Columns.Count;
-            int i = 0;
-            //MessageBox.Show(length.ToString());
-            dr2.Read();
+            
             while (dr.Read())
             {
+                string cId = dr["cId"].ToString();
+                string sql2 = "select * from Course where Id='" + cId + "'";
+                IDataReader dr2 = dao.Read(sql2);
+                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sql2, dao.connectiont());
+                mySqlDataAdapter.Fill(dt2);
+                string[,] course1 = new string[dt2.Rows.Count, dt2.Columns.Count];
+                int length = dt2.Rows.Count;
+                int height = dt2.Columns.Count;
+                int i = 0;
+                dr2.Read();
                 foreach (DataRow DR in dt2.Rows)
                 {
                     int j = 0;
@@ -137,22 +134,7 @@ namespace GDIPlusDemo
                 string[,] course1 = new string[dt.Rows.Count, dt.Columns.Count];
                 int length = dt.Rows.Count;
                 int height = dt.Columns.Count;
-                int i = 0;
-
-
                 dr2.Read();
-
-                foreach (DataRow DR in dt.Rows)
-                {
-                    int j = 0;
-                    foreach (DataColumn DC in dt.Columns)
-                    {
-                        course1[i, j] = DR[DC].ToString();
-                        Console.WriteLine(DR[DC.ColumnName].ToString());
-                        j = j + 1;
-                    }
-                    i = i + 1;
-                }
                 pictureBox1.Image = CodeImage(course1, length, height);
                 dr2.Close();
 

@@ -40,7 +40,6 @@ namespace GDIPlusDemo
         //private Timer timer1;
         private System.Windows.Forms.Timer timer1;
         private IContainer components;
-        private Button button1;
         private Button button2;
         private PictureBox pictureBox2;
         private BackgroundWorker backgroundWorker1;
@@ -52,6 +51,7 @@ namespace GDIPlusDemo
         private ToolStripMenuItem 开机启动ToolStripMenuItem;
         private ToolStripMenuItem 开启ToolStripMenuItem;
         private ToolStripMenuItem 关闭ToolStripMenuItem;
+        private Button button1;
 
         //系统按钮管理器
         private SystemButtonManager _systemButtonManager;
@@ -318,7 +318,6 @@ namespace GDIPlusDemo
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -330,6 +329,7 @@ namespace GDIPlusDemo
             this.开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开启ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -422,16 +422,6 @@ namespace GDIPlusDemo
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(308, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 32);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "取消";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(508, 415);
@@ -452,6 +442,10 @@ namespace GDIPlusDemo
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // linkLabel1
             // 
@@ -488,13 +482,14 @@ namespace GDIPlusDemo
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.开机启动ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
             // 
             // 开机启动ToolStripMenuItem
             // 
@@ -502,23 +497,33 @@ namespace GDIPlusDemo
             this.开启ToolStripMenuItem,
             this.关闭ToolStripMenuItem});
             this.开机启动ToolStripMenuItem.Name = "开机启动ToolStripMenuItem";
-            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.开机启动ToolStripMenuItem.Text = "开机启动";
             this.开机启动ToolStripMenuItem.Click += new System.EventHandler(this.开机启动ToolStripMenuItem_Click);
             // 
             // 开启ToolStripMenuItem
             // 
             this.开启ToolStripMenuItem.Name = "开启ToolStripMenuItem";
-            this.开启ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.开启ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.开启ToolStripMenuItem.Text = "开启";
             this.开启ToolStripMenuItem.Click += new System.EventHandler(this.开启ToolStripMenuItem_Click);
             // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关闭ToolStripMenuItem.Text = "关闭";
             this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(308, 415);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 32);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "取消";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // LoginIndex
             // 
@@ -795,12 +800,17 @@ namespace GDIPlusDemo
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            //(new LoginDelegate(LoginBegin)).BeginInvoke(LoginEnd, null);
-            
+
+
+            backgroundWorker1.RunWorkerAsync(); 
+        }
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
             if (login())
             {
-                
+
                 timer1.Start();
+                //foreach()
                 textBox1.Visible = false;
                 textBox2.Visible = false;
                 comboBox1.Visible = false;
@@ -943,6 +953,12 @@ namespace GDIPlusDemo
             {
                 MessageBox.Show("关闭");
             }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            notifyIcon1.Visible = true;
+            notifyIcon1.ShowBalloonTip(1000, "当前时间", DateTime.Now.ToLocalTime().ToString(), ToolTipIcon.Info);
         }
     }
 }
